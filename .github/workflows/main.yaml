@@ -31,7 +31,7 @@ jobs:
       - run: echo "${{ secrets.key }}" > "$HOME/.ssh/key"
       - run: chmod 600 "$HOME/.ssh/key"
       # Build
-      - run: npm ci --prod
+      - run: npm ci
       - run: npm run build
       # Deploy
       - run: rsync -e "ssh -p 22 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . fourking@fourking.beget.tech:~/fourking.ru/public_html/
