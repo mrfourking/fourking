@@ -1,18 +1,27 @@
+<script context="module">
+	export async function preload(page, session) {
+	  const res = await this.fetch(`api/sections/root`);
+	  const data = await res.json();
+  
+	  return {
+		links: data.sections,
+	  };
+	}
+  </script>
+  
+
 <script>
 	import { stores } from "@sapper/app";
-	import Header from "../components/Header.svelte";
+	import Header from "../components/Header/index.svelte";
+
+	export let links
 
 	const { page } = stores();
-
-	// import Nav from '../components/Nav.svelte';
-
-	// export let segment;
 </script>
 
 {#if $page.path !== "/"}
-	<Header />
+	<Header {links} />
 {/if}
-<!-- <Nav {segment}/> -->
 
 <main>
 	<slot />
@@ -22,8 +31,9 @@
 	@import "../../static/global.css";
 	main {
 		position: relative;
-		max-width: 56em;
-		/* background-color: white; */
+		max-width: 1440px;
+		min-height: calc(100vh - 89px);
+		height: 1px;
 		padding: 2em;
 		margin: 0 auto;
 		box-sizing: border-box;

@@ -2,8 +2,10 @@
   import { onMount } from "svelte";
 
   import { fade } from "svelte/transition";
-  import Link from "./Link.svelte";
+  import Link from "../Link/index.svelte";
   import Logo from "./Logo.svelte";
+
+  export let links;
 
   let isMenuShown = true;
   let isMenuBtnShown = false;
@@ -70,18 +72,11 @@
   {/if}
   {#if isMenuShown}
     <ul class="menu">
-      <li in:fade={{ duration: 600 }}>
-        <Link href="/about">О себе</Link>
-      </li>
-      <li in:fade={{ duration: 600, delay: 100 }}>
-        <Link href="/skills">Навыки</Link>
-      </li>
-      <li in:fade={{ duration: 600, delay: 200 }}>
-        <Link href="/experience">Опыт</Link>
-      </li>
-      <li in:fade={{ duration: 600, delay: 300 }}>
-        <Link href="/education">Образование</Link>
-      </li>
+      {#each links as link, index}
+        <li in:fade={{ duration: 600, delay: index * 100}}>
+          <Link href={link.id}>{link.title}</Link>
+        </li>
+      {/each}
     </ul>
   {/if}
 </header>

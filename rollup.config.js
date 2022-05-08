@@ -94,9 +94,8 @@ export default {
 				emitCss: false
 			}),
 			url({
-				sourceDir: path.resolve(__dirname, 'src/node_modules/images'),
-				publicPath: '/client/',
-				emitFiles: false // already emitted by client build
+				include: './src/db/data.yml',
+				limit: 0
 			}),
 			resolve({
 				dedupe: ['svelte']

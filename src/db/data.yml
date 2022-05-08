@@ -1,0 +1,9 @@
+sections:
+  - id: about
+    title: Кто я?
+
+  # - id: projects
+  #   title: Проекты
+
+  # - id: contacts
+  #   title: Контакты

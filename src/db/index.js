@@ -1,12 +1,15 @@
 import path from 'path'
-import dbPath from './data.json'
-import { JSONFileSync, Low } from 'lowdb/lib';
-
-const adapter = new JSONFileSync(path(__dirname, dbPath))
-const db = new Low(adapter)
+import dbPath from './data.yml'
+import low from 'lowdb'
+import FileSync from 'lowdb/adapters/FileSync'
+import yml from 'js-yaml'
+const adapter = new FileSync(path.join(__dirname, dbPath), { deserialize: yml.load })
+const db = new low(adapter)
 
 const getSections = () => {
-    console.log(db.get('sections'));
+    const collection = db.get('sections')
+
+    return collection
 }
 
 export {

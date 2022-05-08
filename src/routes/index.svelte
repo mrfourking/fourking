@@ -1,15 +1,29 @@
+<script context="module">
+  export async function preload(page, session) {
+    const res = await this.fetch(`api/sections/root`);
+    const data = await res.json();
+
+    return {
+      links: data.sections,
+    };
+  }
+</script>
+
 <script>
   import { onDestroy, onMount } from "svelte";
   import { fly, fade } from "svelte/transition";
   import { expoOut } from "svelte/easing";
 
-  import Link from "../components/Link.svelte";
-  import Logo from "../components/Logo.svelte";
+  import Link from "../components/Link/index.svelte";
+  import Logo from "../components/Header/Logo.svelte";
+
+  export let links
 
   let visible = false;
 
   onMount(() => {
     visible = true;
+    console.log(links)
   });
 
   onDestroy(() => {
@@ -27,18 +41,11 @@
       <Logo />
 
       <ul class="menu">
-        <li in:fade={{ duration: 600, delay: 800 }}>
-          <Link href="about">О себе</Link>
+        {#each links as link, index}
+        <li in:fade={{ duration: 600, delay: 800 + index * 100 }}>
+          <Link href={link.id}>{link.title}</Link>
         </li>
-        <li in:fade={{ duration: 600, delay: 900 }}>
-          <Link href="skills">Навыки</Link>
-        </li>
-        <li in:fade={{ duration: 600, delay: 1000 }}>
-          <Link href="experience">Опыт</Link>
-        </li>
-        <li in:fade={{ duration: 600, delay: 1100 }}>
-          <Link href="education">Образование</Link>
-        </li>
+        {/each}
       </ul>
     </div>
     <div in:fly={{ x: 200, duration: 1000, easing: expoOut }} class="avatar">
