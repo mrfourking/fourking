@@ -34,9 +34,9 @@ jobs:
           KEY: ${{ secrets.SSH_KEY }}
         with:
           source: "."
-          tar_tmp_path: "~/tmp/"
           target: "~/fourking.ru/"
           overwrite: true
+          tar_tmp_path: "~/tmp/"
 
       - name: Executing remote command
         uses: appleboy/ssh-action@master
