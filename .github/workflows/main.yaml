@@ -34,6 +34,7 @@ jobs:
           KEY: ${{ secrets.SSH_KEY }}
         with:
           source: "."
+          tar_tmp_path: "~/tmp/"
           target: "~/fourking.ru/"
           overwrite: true
 
