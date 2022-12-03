@@ -27,24 +27,28 @@ jobs:
 
       - name: Copy repository contents via scp
         uses: appleboy/scp-action@master
-        env:
-          HOST: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
-          PORT: ${{ secrets.PORT }}
-          KEY: ${{ secrets.SSH_KEY }}
+        # env:
+        #   HOST: ${{ secrets.HOST }}
+        #   USERNAME: ${{ secrets.USERNAME }}
+        #   PORT: ${{ secrets.PORT }}
+        #   KEY: ${{ secrets.SSH_KEY }}
         with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.SSH_KEY }}
           source: "./*"
-          target: "/home/fourking/fourking.ru/"
-          overwrite: true
-          tar_tmp_path: "/home/fourking/tmp/"
+          target: "~/fourking.ru/"
+          # overwrite: true
+          # tar_tmp_path: "/home/fourking/tmp/"
 
       - name: Executing remote command
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
-          PORT: ${{ secrets.PORT }}
-          KEY: ${{ secrets.SSH_KEY }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.SSH_KEY }}
           script: |
             cp ~/fourking.ru/static ~/fourking.ru/public_html/__sapper__/build
 
