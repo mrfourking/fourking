@@ -37,20 +37,21 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSH_KEY }}
-          source: "./*"
-          target: "~/fourking.ru/"
+          source: "src/template.html"
+          target: "~/test/"
+          strip_components: 1
           # overwrite: true
           # tar_tmp_path: "/home/fourking/tmp/"
 
-      - name: Executing remote command
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          port: ${{ secrets.PORT }}
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            cp ~/fourking.ru/static ~/fourking.ru/public_html/__sapper__/build
+      # - name: Executing remote command
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{ secrets.HOST }}
+      #     username: ${{ secrets.USERNAME }}
+      #     port: ${{ secrets.PORT }}
+      #     key: ${{ secrets.SSH_KEY }}
+      #     script: |
+      #       cp ~/fourking.ru/static ~/fourking.ru/public_html/__sapper__/build
 
       # # Runs a single command using the runners shell
       # - run: set -eu
