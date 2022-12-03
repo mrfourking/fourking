@@ -33,10 +33,10 @@ jobs:
           PORT: ${{ secrets.PORT }}
           KEY: ${{ secrets.SSH_KEY }}
         with:
-          source: "."
-          target: "~/fourking.ru/"
+          source: "./*"
+          target: "/home/fourking/fourking.ru/"
           overwrite: true
-          tar_tmp_path: "~/tmp/"
+          tar_tmp_path: "/home/fourking/tmp/"
 
       - name: Executing remote command
         uses: appleboy/ssh-action@master
